@@ -1,0 +1,23 @@
+Q:Have the function EightQueens(strArr) read strArr which will be an array consisting of the locations of eight Queens on a standard 8×8 chess board with no other pieces on the board. The structure of strArr will be the following: [“(x,y)”, “(x,y)”, …] where (x,y) represents the position of the current queen on the chessboard (x and y will both range from 1 to 8 where 1,1 is the bottom-left of the chessboard and 8,8 is the top-right). Your program should determine if all of the queens are placed in such a way where none of them are attacking each other. If this is true for the given input, return the string true otherwise return the first queen in the list that is attacking another piece in the same format it was provided.
+
+For example: if strArr is [“(2,1)”, “(4,2)”, “(6,3)”, “(8,4)”, “(3,5)”, “(1,6)”, “(7,7)”, “(5,8)”] then your program should return the string true.
+
+Code:-
+function EightQueens(strArr) {
+  const queens = strArr.map((coord) => {
+    const x = parseInt(coord[1]);
+    const y = parseInt(coord[3]);
+    return { x, y };
+  });
+  for (let i = 0; i < queens.length; i++) {
+    for (let j = i + 1; j < queens.length; j++) {
+      const q1 = queens[i];
+      const q2 = queens[j];
+      if (q1.x === q2.x || q1.y === q2.y || Math.abs(q1.x - q2.x) === Math.abs(q1.y - q2.y)) {
+        return `(${q1.x},${q1.y})`;
+      }
+    }
+  }
+  return true;
+}
+console.log(EightQueens(readline()));
